@@ -8,12 +8,12 @@ public class WoWHeadParser {
 
 	private Document doc;
 
-	private String profession; //Der Name des Jobs
-	private String professionLevel; //Die Stufe des Jobs
-	private String charLevel; //Die benötigte Stufe des Charakters
-	private String professionName; //
-	private String professionSpellId; //Die Spell ID dieses Spells
-	private String professionCost; //Die Kosten zum lernen dieses Spells
+	private String profession; //The name of the profession
+	private String professionLevel; //The needed level in that profession
+	private String charLevel; //The needed level of the character
+	private String professionName; //The name of the spell for this profession
+	private String professionSpellId; //The DB id of this spell
+	private String professionCost; //The cost to learn this spellsgit
 
 	public WoWHeadParser(String link) throws IOException {
 		this.doc = Jsoup.connect(link).get();
