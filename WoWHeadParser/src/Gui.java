@@ -28,6 +28,8 @@ public class Gui extends JFrame{
 		this.bottom = new JPanel(new GridLayout(2,1));
 		this.eingabe = new JTextField();
 		this.eingabe.setActionCommand("eingabeFeld");
+		this.eingabe.addFocusListener(c);
+		this.eingabe.addMouseListener(c);
 		this.eingabe.addKeyListener(c);
 		
 		this.errors = new JLabel("Bitte einfach dein Link zum Spell einfügen und Enter drücken!");
