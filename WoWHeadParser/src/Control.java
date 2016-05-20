@@ -22,7 +22,7 @@ public class Control implements KeyListener, FocusListener, MouseListener {
 		g = new Gui(this);
 	}
 
-	public String abfrageDurchführen(String link) throws IOException {
+	public String startRequest(String link) throws IOException {
 		WoWHeadParser wow = new WoWHeadParser(link);
 		return "(" + wow.getProfession() + "," + wow.getProfessionSpellId() + "," + wow.getProfessionCost() + ","
 				+ wow.getProfession() + "Skill," + wow.getProfessionLevel() + "," + wow.getCharLevel() + "), -- Spell "
@@ -50,7 +50,7 @@ public class Control implements KeyListener, FocusListener, MouseListener {
 		if (ke.getSource().equals(g.getEingabe())) {
 			if (ke.getKeyChar() == KeyEvent.VK_ENTER) {
 				try {
-					String output = this.abfrageDurchführen(g.getEingabe().getText());
+					String output = this.startRequest(g.getEingabe().getText());
 					g.getEingabe().setText("");
 					g.getEingabe().transferFocus();
 					g.setOutput(output + "\r\n");
