@@ -29,21 +29,25 @@ public class Control implements KeyListener, FocusListener, MouseListener {
 				+ wow.getProfessionName();
 	}
 
+	/**
+	 * Not needed so far
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Not needed so far
+	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void keyTyped(KeyEvent ke) {
-		if (ke.getSource().equals(g.eingabe)) {
+		if (ke.getSource().equals(g.getEingabe())) {
 			if (ke.getKeyChar() == KeyEvent.VK_ENTER) {
 				try {
 					String output = this.abfrageDurchführen(g.getEingabe().getText());
@@ -64,7 +68,6 @@ public class Control implements KeyListener, FocusListener, MouseListener {
 					try {
 						Thread.sleep(2000);
 					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					g.setError("This Spells is not compatible so far!");
@@ -73,7 +76,6 @@ public class Control implements KeyListener, FocusListener, MouseListener {
 				} catch (IllegalArgumentException e) {
 					g.setError(e.toString());
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -81,7 +83,7 @@ public class Control implements KeyListener, FocusListener, MouseListener {
 	}
 
 	public static void main(String[] args) {
-		Control c = new Control();
+		new Control();
 	}
 
 	@Override
@@ -91,9 +93,11 @@ public class Control implements KeyListener, FocusListener, MouseListener {
 		}
 	}
 
+	/**
+	 * Not needed so far
+	 */
 	@Override
 	public void focusLost(FocusEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -101,20 +105,17 @@ public class Control implements KeyListener, FocusListener, MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource().equals(g.getEingabe())) {
 			if (e.getButton() == MouseEvent.BUTTON3) {
-				// TODO Clipboard code
-
 				Clipboard zwischenablage = Toolkit.getDefaultToolkit().getSystemClipboard();
 				Transferable transferData = zwischenablage.getContents("");
 				for (DataFlavor dataFlavor : transferData.getTransferDataFlavors()) {
 					try {
 						Object content = transferData.getTransferData(dataFlavor);
 						if (content instanceof String) {
-							g.eingabe.setText((String) content);
-							g.eingabe.requestFocusInWindow();
+							g.getEingabe().setText((String) content);
+							g.getEingabe().requestFocusInWindow();
 							break;
 						}
 					} catch (UnsupportedFlavorException | IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 
@@ -124,27 +125,35 @@ public class Control implements KeyListener, FocusListener, MouseListener {
 		}
 	}
 
+	/**
+	 * Not needed so far
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
+	/**
+	 * Not needed so far
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	
 	}
 
+	/**
+	 * Not needed so far
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	
 	}
 
+	/**
+	 * Not needed so far
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 }

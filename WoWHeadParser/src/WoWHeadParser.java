@@ -7,94 +7,152 @@ import org.jsoup.select.Elements;
 public class WoWHeadParser {
 
 	private Document doc;
+	private String[] splits;
 
-	private String profession; //The name of the profession
-	private String professionLevel; //The needed level in that profession
-	private String charLevel; //The needed level of the character
-	private String professionName; //The name of the spell for this profession
-	private String professionSpellId; //The DB id of this spell
-	private String professionCost; //The cost to learn this spellsgit
+	private String profession; // The name of the profession
+	private String professionLevel; // The needed level in that profession
+	private String charLevel; // The needed level of the character
+	private String professionName; // The name of the spell for this profession
+	private String professionSpellId; // The DB id of this spell
+	private String professionCost; // The cost to learn this spell
 
 	public WoWHeadParser(String link) throws IOException {
 		this.doc = Jsoup.connect(link).get();
-		this.setProfession("");
-		setProfessionLevel("");
-		setCharLevel("0");
-		setProfessionName("");
-		setProfessionSpellId("");
-		setProfessionCost("");
+		this.profession = "";
+		this.professionLevel = "";
+		this.charLevel = "0";
+		this.professionName = "";
+		this.professionSpellId = "";
+		this.professionCost = "";
 
 		Element el = doc.getElementsByClass("infobox").first();
-
 		Element script = el.getElementsByTag("script").first();
-		String html = script.toString();
-		String[] splits = html.split("x20");
-		this.setProfession(splits[1].substring(0, splits[1].length() - 1));
 
-		String[] hilfe = splits[2].split("5B");
-		this.setProfessionLevel(hilfe[0].substring(4, hilfe[0].length() - 6));
+		this.splits = script.toString().split("x20");
 
-		hilfe = splits[5].split("3D")[1].split("5D");
-		this.setProfessionCost(hilfe[0].substring(0, hilfe[0].length() - 2));
+		this.prepareProfession();
 
-		Elements meta = doc.getElementsByTag("meta");
+		this.prepareProfessionLevel();
 
-		for (Element metaelem : meta) {
-			String name = metaelem.attr("property");
-			if (name.equals("og:title")) {
-				this.setProfessionName(metaelem.attr("content"));
-			} else if (name.equals("og:url")) {
-				String id = metaelem.attr("content");
-				this.setProfessionSpellId(id.split("=")[1].split("/")[0]);
-			}
-		}
+		this.prepareProfessionCost();
+
+		this.prepareProfessionName();
+		
+		this.prepareProfessionSpellId();
+		
+		this.prepareCharLevel();
 	}
 
+	/**
+	 * Returns the extracted name of the profession of the given spell
+	 * 
+	 * @return The extracted name of the profession
+	 */
 	public String getProfession() {
 		return profession;
 	}
 
-	public void setProfession(String profession) {
-		this.profession = profession;
+	/**
+	 * Extracts the profession of the given spell
+	 */
+	public void prepareProfession() {
+
+		this.profession = this.splits[1].substring(0, this.splits[1].length() - 1);
 	}
 
+	/**
+	 * Returns the extracted spell id of the given spell
+	 * 
+	 * @return The spell id
+	 */
 	public String getProfessionSpellId() {
 		return professionSpellId;
 	}
 
-	public void setProfessionSpellId(String professionSpellId) {
-		this.professionSpellId = professionSpellId;
+	/**
+	 * Extracts the spell id of the given spell
+	 */
+	public void prepareProfessionSpellId() {
+		Elements meta = doc.getElementsByTag("meta");
+		for (Element metaelem : meta) {
+			String name = metaelem.attr("property");
+			if (name.equals("og:url")) {
+				String id = metaelem.attr("content");
+				this.professionSpellId = id.split("=")[1].split("/")[0];
+			}
+		}
 	}
 
+	/**
+	 * Returns the extracted cost of this spell to learn it
+	 * 
+	 * @return The extracted cost
+	 */
 	public String getProfessionCost() {
 		return professionCost;
 	}
 
-	public void setProfessionCost(String professionCost) {
-		this.professionCost = professionCost;
+	/**
+	 * Extracts the cost of the given spell to learn it
+	 */
+	public void prepareProfessionCost() {
+		String[] hilfe = splits[2].split("5B");
+		hilfe = splits[5].split("3D")[1].split("5D");
+		this.professionCost = hilfe[0].substring(0, hilfe[0].length() - 2);
 	}
 
+	/**
+	 * Returns the extracted level of the profession needed to learn this spell
+	 * 
+	 * @return The extracted profession level
+	 */
 	public String getProfessionLevel() {
 		return professionLevel;
 	}
 
-	public void setProfessionLevel(String professionLevel) {
-		this.professionLevel = professionLevel;
+	/**
+	 * Extracts the level of the profession needed to learn this spell
+	 */
+	public void prepareProfessionLevel() {
+		String[] hilfe = splits[2].split("5B");
+		this.professionLevel = hilfe[0].substring(4, hilfe[0].length() - 6);
 	}
 
+	/**
+	 * Returns the needed char level to learn this spell
+	 * 
+	 * @return The needed char level
+	 */
 	public String getCharLevel() {
 		return charLevel;
 	}
 
-	public void setCharLevel(String charLevel) {
-		this.charLevel = charLevel;
+	/**
+	 * Currently sets the char level to 0
+	 */
+	public void prepareCharLevel() {
+		this.charLevel = "0";
 	}
 
+	/**
+	 * Returns the extracted name of the given spell
+	 * 
+	 * @return the name of the given spell
+	 */
 	public String getProfessionName() {
 		return professionName;
 	}
 
-	public void setProfessionName(String professionName) {
-		this.professionName = professionName;
+	/**
+	 * Extracts the name of the given spell
+	 */
+	public void prepareProfessionName() {
+		Elements meta = doc.getElementsByTag("meta");
+		for (Element metaelem : meta) {
+			String name = metaelem.attr("property");
+			if (name.equals("og:title")) {
+				this.professionName = metaelem.attr("content");
+			}
+		}
 	}
 }
