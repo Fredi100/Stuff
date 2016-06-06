@@ -8,7 +8,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class Gui extends JFrame {
+public class WoWFrame extends JFrame {
 
 	// Center-Stuff
 	private JTextArea sqlOutput;
@@ -21,7 +21,7 @@ public class Gui extends JFrame {
 	// Others
 	private Control c;
 
-	public Gui(Control c) {
+	public WoWFrame(Control c) {
 		this.c = c;
 		this.setLayout(new BorderLayout());
 		this.bottom = new JPanel();

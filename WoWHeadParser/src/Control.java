@@ -16,10 +16,10 @@ import org.jsoup.HttpStatusException;
 
 public class Control implements KeyListener, FocusListener, MouseListener {
 
-	private Gui g;
+	private WoWFrame g;
 
 	public Control() {
-		g = new Gui(this);
+		g = new WoWFrame(this);
 	}
 
 	public String startRequest(String link) throws IOException {
