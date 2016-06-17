@@ -3,12 +3,16 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class WoWFrame extends JFrame {
+	
+	//Top Stuff
+	private WoWMenuBar menuBar;
 
 	// Center-Stuff
 	private JTextArea sqlOutput;
@@ -26,11 +30,21 @@ public class WoWFrame extends JFrame {
 		this.setLayout(new BorderLayout());
 		this.bottom = new JPanel();
 		this.sqlOutput = new JTextArea();
+		this.menuBar = new WoWMenuBar(c);
+		this.prepareTop();
 		this.prepareBottom();
 		this.prepareCenter();
 		this.prepareWindow();
+		
 	}
-
+	
+	/**
+	 * Prepares the top area of the windows which holds the JMenuBar and its Menus
+	 */
+	public void prepareTop(){
+		this.add(menuBar, BorderLayout.NORTH);
+	}
+	
 	/**
 	 * Prepares the bottom half of the windows including the input field and the
 	 * message output
@@ -85,6 +99,10 @@ public class WoWFrame extends JFrame {
 	public void setOutput(String output) {
 		this.sqlOutput.append(output);
 	}
+	
+	public String getOutput(){
+		return sqlOutput.getText();
+	}
 
 	/**
 	 * Changes the displayed text off the error message field
@@ -94,5 +112,25 @@ public class WoWFrame extends JFrame {
 	 */
 	public void setError(String error) {
 		this.errors.setText(error);
+	}
+	
+	public String displayImportWindows(){
+		String path = JOptionPane.showInputDialog("Please insert the path to your Link-File.");
+		return path;
+	}
+	
+	public String displayOutputWindows(){
+		String path = JOptionPane.showInputDialog("Please insert a path and name for the new file to be exported.");
+		return path;
+	}
+	
+	public void displayAboutWindow(){
+		String output = "This programm is used to extract spell informations from WoWHead and export them into SQL code.\n";
+		JOptionPane.showMessageDialog(null, output);
+	}
+	
+	public void displayContactWindow(){
+		String output = "This programm is made by Alfred Emsenhuber(Fredi100). It is licensed under the CC BY license.";
+		JOptionPane.showMessageDialog(null, output);
 	}
 }
