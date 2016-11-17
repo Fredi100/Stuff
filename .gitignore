@@ -14,3 +14,8 @@ hs_err_pid*
 #eclipse
 .metadata
 .recommenders
+.classpath
+.project
+
+#Intellij
+.idea
