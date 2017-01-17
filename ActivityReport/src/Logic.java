@@ -44,25 +44,4 @@ public class Logic {
 		}
 		return printString;
 	}
-
-	public static void main(String[] args) {
-		//TODO Rewrite the whole logic to incorporate with the new design
-		Window w = new Window();
-		w.pb.addPlayer("Test1");
-		w.pb.addPlayer("Test2");
-		w.pb.addPlayer("Test3");
-		w.pb.addPlayer("Test4");
-		w.pb.addPlayer("Test5");
-		w.refreshWindow();
-		w.displayPlayerView();
-		w.setVisible(true);
-		try {
-			String stats = playerMatches("Fredi100");
-			//JsonParser.parseString(stats);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}/* catch (ParseException e) {
-			e.printStackTrace();
-		}*/
-	}
 }

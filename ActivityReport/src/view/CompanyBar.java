@@ -15,8 +15,10 @@ public class CompanyBar extends JScrollPane{
 	private JButton killComButton;
 	private JButton assistComButton;
 	private JButton gamemodeComButton;
+	//TODO Add more Buttons like Stats and other informations
 	
 	public CompanyBar(){
+		super();
 		this.killComButton = new JButton("Kill Commendations");
 		this.killComButton.setActionCommand(KILL_COM_ACTION_COMMAND);
 		
